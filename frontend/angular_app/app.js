@@ -14,8 +14,8 @@ angular
         ctrls: "/angular_app/templates/ctrls",
         tmpl: "/static/MusikTemplate"
     })
-    .constant('backendEndpoint', '127.0.0.1')
-    .constant('backendPort', '9000')
+    .constant('backendEndpoint', '37.187.58.217')
+    .constant('backendPort', '9001')
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $animateProvider, path) {
         $urlRouterProvider.otherwise("/index");
         $urlRouterProvider.when('', '/index');
