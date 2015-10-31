@@ -1,0 +1,42 @@
+<div class="bg-info dker wrapper-full">
+    <section id="content" class="wrapper-md animated fadeInUp">
+        <div class="container aside-xl">
+            <a class="navbar-brand block" href="index.html"><span class="h1 font-bold">Sylwester 2015/2016</span></a>
+            <section class="m-b-lg">
+                <header class="wrapper text-center">
+                    <strong>Sign in to get in touch</strong><br>
+                    <strong class="text-danger" ng-show="errorCode">{{errorCode}}</strong>
+                </header>
+                <form ng-submit="login()">
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" ng-model="email"
+                               class="form-control rounded input-lg text-center no-border">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" ng-model="password"
+                               class="form-control rounded input-lg text-center no-border">
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i
+                            class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign in</span></button>
+                    <div class="text-center m-t m-b"><a href="#">
+                        <small>Forgot password?</small>
+                    </a></div>
+                    <div class="line line-dashed"></div>
+                    <p class="text-muted text-center">
+                        <small>Do not have an account?</small>
+                    </p>
+                    <a ng-click="signup()" class="btn btn-lg btn-info btn-block rounded">Create an account</a>
+                </form>
+            </section>
+        </div>
+    </section>
+    <!-- footer -->
+    <footer id="footer">
+        <div class="text-center padder">
+            <p>
+                <small>Web app framework base on Bootstrap<br>&copy; 2014</small>
+            </p>
+        </div>
+    </footer>
+
+</div>

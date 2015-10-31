@@ -1,0 +1,13 @@
+<div>
+    <span class="pull-right h2 text-muted m-l"><div class="fa fa-{{vote.up_vote ? 'plus' : 'minus'}}"></div></span>
+<span class="pull-left thumb-sm avatar m-r">
+                            <img ng-src="{{backendurl+vote.get_avatar}}" alt="...">
+
+                          </span>
+    <small class="text-muted clear text-ellipsis">{{vote.user_name}}</small>
+<span class="clear">
+                            <span>{{vote.track_name}}</span>
+                            <small class="text-muted clear text-ellipsis">{{vote.track_artist}}</small>
+                          </span>
+
+</div>

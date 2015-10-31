@@ -1,0 +1,10 @@
+<div>
+    <a class="pull-left avatar thumb-sm">
+        <img ng-src="{{backendurl+user.get_avatar}}" alt="..." class="img-circle">
+        <i class="on b-black" ng-show="user.online"></i>
+    </a>
+    <a class="clear">
+        <span class="block text-ellipsis">{{user.username}}</span>
+        <small class="text-muted">{{user.email}}</small>
+    </a>
+</div>

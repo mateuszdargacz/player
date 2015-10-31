@@ -1,0 +1,300 @@
+<section class="vbox">
+    <header class="bg-black lter header header-md navbar navbar-fixed-top-xs">
+        <div class="navbar-header aside bg-success nav-xs">
+            <a class="btn btn-link visible-xs">
+                <i class="icon-list"></i>
+            </a>
+            <a ng-click="main()" class="navbar-brand text-lt">
+                <i class="icon-earphones"></i>
+                <img src="static/MusikTemplate/images/logo.png" alt="." class="hide">
+                <span ng-show="showTitles"
+                      ng-class="{'hidden-nav-xs m-l-sm': true, 'animated fadeIn': showTitles}">Sylwester 2015/2016</span>
+            </a>
+            <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
+                <i class="icon-settings"></i>
+            </a>
+        </div>
+        <ul class="nav navbar-nav hidden-xs">
+            <li>
+                <a ng-click="showbar()" href=".navbar-header,#nav" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+                    <i class="fa fa-indent text"></i>
+                    <i class="fa fa-dedent text-active"></i>
+                </a>
+            </li>
+        </ul>
+        <form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search" ng-submit="searchsongs()">
+            <div class="form-group">
+                <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
+            </span>
+                    <input ng-model="searchterm" type="text" class="form-control input-sm no-border rounded"
+                           placeholder="Search songs">
+                </div>
+            </div>
+        </form>
+        <div class="navbar-right ">
+            <ul class="nav navbar-nav m-n hidden-xs nav-user user">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img ng-src="{{backendurl + user.get_avatar}}" alt="...">
+              </span>
+                        {{ user.username }} <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeIn">
+                        <li>
+                            <a ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section>
+        <section class="hbox stretch">
+            <!-- .aside -->
+            <aside class="bg-black dk nav-xs aside hidden-print" id="nav">
+                <section class="vbox">
+                    <section class="w-f-md scrollable">
+                        <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0"
+                             data-size="10px" data-railOpacity="0.2">
+
+
+                            <!-- nav -->
+                            <nav class="nav-primary hidden-xs">
+                                <ul class="nav bg clearfix">
+                                    <li>
+                                        <a ng-click="disconnect()" ng-href="#/index">
+                                            <i class="icon-disc icon text-success"></i>
+                                            <span ng-show="showTitles"
+                                                  ng-class="{'font-bold': true, 'animated fadeIn': showTitles}">What's new</span>
+                                            <span class="navtitle" ng-hide="showTitles"> </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="disconnect()" ng-href="#/chat">
+                                            <i class="fa fa-comments-o text-success"></i>
+                                            <span ng-show="showTitles"
+                                                  ng-class="{'font-bold': true, 'animated fadeIn': showTitles}">Chat</span>
+                                            <span class="navtitle" ng-hide="showTitles"> </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="disconnect()" ng-href="#/allplaylists">
+                                            <i class="icon-list icon  text-success"></i>
+                                            <span ng-class="{'font-bold': true, 'animated fadeIn': showTitles}"
+                                                  ng-show="showTitles"
+                                                  ng-class="{'animated': showTitles}">Playlists</span>
+                                            <span class="navtitle" ng-hide="showTitles"> </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="disconnect()" ng-href="#/allsongs">
+                                            <i class="icon-music-tone icon text-success"></i>
+                                            <span ng-class="{'font-bold': true, 'animated fadeIn': showTitles}"
+                                                  ng-show="showTitles">All songs</span>
+                                            <span class="navtitle" ng-hide="showTitles"> </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="disconnect()" ng-href="#/add">
+                                            <i class="icon-cloud-upload icon  text-success"></i>
+                                            <span ng-class="{'font-bold': true, 'animated fadeIn': showTitles}"
+                                                  ng-show="showTitles">Add Song</span>
+                                            <span class="navtitle" ng-hide="showTitles"> </span>
+                                        </a>
+                                    </li>
+                                    <li class="m-b hidden-nav-xs"></li>
+                                </ul>
+                                <ul class="nav text-md">
+                                    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
+                                            <span ng-show="showTitles" class="pull-right"><a ng-click="disconnect()"
+                                                                                             href="#/newplaylist"><i
+                                                    class="icon-plus i-lg"></i></a></span>
+                                        Playlists
+                                    </li>
+                                    <li ng-repeat="playlist in myplaylists">
+                                        <a ng-click="disconnect()" ng-href="#/listen/{{playlist.id}}">
+                                            <i class="icon-music-tone icon"></i>
+                                            <span ng-show="showTitles"
+                                                  ng-class="{'navtitle-show': true,'animated fadeIn': showTitles}"
+                                                  limit>{{playlist.name}}</span>
+                                            <span class="navtitle" ng-hide="showTitles"> </span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </nav>
+                            <!-- / nav -->
+                        </div>
+                    </section>
+                </section>
+            </aside>
+            <!-- /.aside -->
+            <section id="content">
+                <section class="vbox">
+                    <section class="w-f-md">
+                        <section class="hbox stretch bg-black dker">
+                            <!-- side content -->
+                            <aside ng-class="{'col-sm-6 no-padder' : clickeduser, 'col-sm-9 no-padder': !clickeduser}">
+                                <section class="vbox animated fadeInUp">
+                                    <section class="scrollable">
+                                        <div class="m-t-n-xxs item pos-rlt">
+                                            <div class="top text-right">
+                        <span class="musicbar animate bg-success bg-empty inline m-r-lg m-t"
+                              style="width:25px;height:30px">
+                          <span class="bar1 a3 lter"></span>
+                          <span class="bar2 a5 lt"></span>
+                          <span class="bar3 a1 bg"></span>
+                          <span class="bar4 a4 dk"></span>
+                          <span class="bar5 a2 dker"></span>
+                        </span>
+                                            </div>
+                                            <div class="bottom gd bg-info wrapper-lg">
+                                                <span class="pull-right text-sm"
+                                                      ng-show="playlist.invited_new.length != 0">{{playlist.invited_new.length}} Followers</span><br>
+                                                <span class="pull-right text-sm m-t-sm"
+                                                      ng-show="votesLeft.votes_left_chart>0">You have {{votesLeft.votes_left_chart}} votes left</span>
+                                                <span class="pull-right text-sm m-t-sm"
+                                                      ng-show="votesLeft.votes_left_chart<1">No votes left!</span>
+
+                                                <span class="h2 font-thin">{{playlist.name}}</span>
+                                            </div>
+                                            <img class="img-full" src="static/MusikTemplate/images/m44.jpg"
+                                                 alt="...">
+                                        </div>
+                                        <!--list of tracks-->
+                                        <ul class=" list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
+                                            <div ng-class="{'lter text-white' : track.was_played_today, 'text-success' : track.id == playingTrack.id}"
+                                                 ng-repeat="track in playlist.track_list">
+                                                <li class="list-group-item">
+                                                    <trackonlist track="track" upvote="upvote(track)"
+                                                                 downvote="downvote(track)"
+                                                                 votesleft="votesLeft.votes_left_chart"
+                                                                 backendurl="backendurl"></trackonlist>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </section>
+                                </section>
+                            </aside>
+                            <!-- / side content -->
+                            <section class="'col-sm-3' no-padder bg" id="#votesbar" ng-show="clickeduser">
+                                <section class="vbox">
+                                    <section class="scrollable">
+                                        <uservotes clickeduser="clickeduser"></uservotes>
+                                    </section>
+                                </section>
+                            </section>
+                            <section class="col-sm-3 no-padder lt">
+                                <section class="vbox">
+                                    <section class="scrollable hover">
+                                        <h3 class="font-thin m-t-xs m-l-sm">Followers: </h3>
+                                        <ul class="list-group list-group-lg no-bg auto m-b-none m-t-n-xxs">
+                                            <li ng-class="{'list-group-item clearfix userclickable': true, 'userselected': user === clickeduser}"
+                                                ng-repeat="user in followers" ng-click="userSelected(user)">
+                                                <useronlistenpage user="user"
+                                                                  backendurl="backendurl"></useronlistenpage>
+                                            </li>
+
+                                        </ul>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+
+                    <footer class="footer bg-success dker">
+                        <div id="jp_container_N">
+                            <div class="jp-type-playlist">
+                                <div id="jplayer_N" class="jp-jplayer hide"></div>
+                                <div class="jp-gui">
+                                    <div class="jp-video-play hide">
+                                        <a class="jp-video-play-icon">play</a>
+                                    </div>
+                                    <div class="jp-interface">
+                                        <div class="jp-controls">
+                                            <div ng-show="playlist.owned_by.id==user.id">
+                                                <a class="jp-play" ng-click="play()" ng-hide="isplaying"><i
+                                                        class="icon-control-play i-2x"></i></a>
+                                                <a class="jp-pause" ng-click="pause()" ng-show="isplaying"><i
+                                                        class="icon-control-pause i-2x"></i></a>
+                                            </div>
+                                            <div ng-show="playlist.owned_by.id==user.id">
+                                                <a class="jp-next" ng-click="nexttrack()"><i
+                                                        class="icon-control-forward i-lg"></i></a>
+                                            </div>
+                                            <div class="jp-progress hidden-xs">
+                                                <div class="jp-seek-bar dk">
+                                                    <div class="jp-play-bar bg" ng-style="{'width': progress +'%'}">
+                                                    </div>
+                                                    <div class="jp-title text-lt">
+                                                        <ul>
+                                                            <li ng-show="playingTrack">
+                                                                <strong>{{playingTrack.artist+' - '+playingTrack.title}}</strong>
+                                                            </li>
+                                                            <li><strong></strong></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-show="playlist.owned_by.id==user.id"
+                                                 class="hidden-xs hidden-sm jp-current-time text-xs text-muted">
+                                                {{formattedTime}}
+                                            </div>
+
+                                            <div class="hidden-xs hidden-sm">
+                                                <a class="jp-mute" title="mute" ng-click="mute()" ng-hide="muted"><i
+                                                        class="icon-volume-2"></i></a>
+                                                <a class="jp-unmute" ng-click="mute()" ng-show="muted"
+                                                   title="unmute"><i
+                                                        class="icon-volume-off"></i></a>
+                                            </div>
+                                            <div class="hidden-xs hidden-sm jp-volume" ng-click="changeVolume($event)">
+                                                <div class="jp-volume-bar dk">
+                                                    <div class="jp-volume-bar-value lter"
+                                                         ng-style="{'width': 100*volume +'%'}">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="hide">
+                                                <a class="jp-full-screen" title="full screen"><i
+                                                        class="fa fa-expand"></i></a>
+                                                <a class="jp-restore-screen" title="restore screen"><i
+                                                        class="fa fa-compress text-lt"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="jp-playlist dropup" id="playlist">
+                                    <ul class="dropdown-menu aside-xl dker">
+                                        <!-- The method Playlist.displayPlaylist() uses this unordered list -->
+                                        <li class="list-group-item"></li>
+                                    </ul>
+                                </div>
+                                <div class="jp-no-solution hide">
+                                    <span>Update Required</span>
+                                    To play the media you will need to either update your browser to a recent
+                                    version or update your <a href="http://get.adobe.com/flashplayer/"
+                                                              target="_blank">Flash plugin</a>.
+                                </div>
+                            </div>
+                        </div>
+
+                    </footer>
+                </section>
+                <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open"
+                   data-target="#nav,html"></a>
+            </section>
+        </section>
+    </section>
+</section>
+<!--YouTube player-->
+<iframe id="YTplayer" class="hidden" ng-src="{{trustSrc(YTlink)}}"></iframe>
+
+<!--SoundCloud Player-->
+<iframe id="SCplayer" class="hidden" width="100%" height="166" scrolling="no" frameborder="no"
+        ng-src="{{trustSrc(SClink)}}"></iframe>

@@ -1,0 +1,16 @@
+<div class="item">
+    <div class="pos-rlt">
+        <div class="item-overlay opacity r r-2x bg-black">
+            <div class="center text-center m-t-n" ng-show="song.link">
+                <a ng-href="{{song.link}}" target="_blank"><i
+                        class="icon-eyeglasses i-2x"></i></a>
+            </div>
+        </div>
+        <a ng-href="{{song.link}}" target="_blank"><img ng-src="{{song.get_image ? backendurl+song.get_image : '/static/MusikTemplate/images/m22.jpg'}}" class="r r-2x img-full img-newsong"></a>
+    </div>
+    <div class="padder-v">
+        <a ng-href="{{song.link}}" class="text-ellipsis" target="_blank">{{song.title}}</a>
+        <a ng-href="{{song.link}}"
+           class="text-ellipsis text-xs text-muted" target="_blank">{{song.artist}}</a>
+    </div>
+</div>

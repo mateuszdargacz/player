@@ -1,0 +1,72 @@
+<div>
+    <div class="row">
+        <div class="clear text-ellipsis col-sm-10">
+            <span>{{track.title}} - </span>
+            <span>{{track.artist}}</span>
+            <br>
+
+            <div class="wrapper-xs">
+                <a ng-show="track.link.indexOf('youtube') > -1 || track.link.indexOf('soundcloud') > -1"
+                   ng-href="{{track.link}}" target="_blank"><i
+                        class="icon-eyeglasses"></i></a>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <a ng-show="votesleft>0" ng-click="upvote(track)" class="m-r-sm"><i class="fa fa-plus-circle"></i></a>
+            <a ng-show="votesleft>0" ng-click="downvote(track)"><i class="fa fa-minus-circle"></i></a>
+        </div>
+        <div class="col-sm-1">
+            <span>{{track.total_relative_votes}} Votes</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clear text-ellipsis text-center col-sm-2 col-sm-offset-5">
+            <a class="padder-v" ng-click="showdetails=!showdetails">
+                <i ng-hide="showdetails" class="fa fa-arrow-down"></i>
+                <i ng-show="showdetails" class="fa fa-arrow-up"></i>
+            </a>
+        </div>
+    </div>
+    <hr class="b-dark" ng-show="showdetails">
+    <div class="row animated flipInX text-lt" ng-show="showdetails">
+        <div class="clear text-ellipsis col-sm-3">
+            <img ng-show="track.image" class="img-rounded trackdetails" ng-src="{{backendurl+track.image}}">
+            <img ng-show="!track.image" class="img-rounded trackdetails" src="static/MusikTemplate/images/m22.jpg">
+        </div>
+        <div class="clear text-ellipsis col-sm-3">
+            <table>
+                <tr class="wrapper-sm" ng-show="track.added_username">
+                    <td class="padder-md"><span>Added by: </span></td>
+                    <td><span>{{track.added_username}}</span></td>
+                </tr>
+                <tr class="wrapper-sm" ng-show="track.category">
+                    <td class="padder-md"><span>Category: </span></td>
+                    <td><span>{{track.category}}</span></td>
+                </tr>
+                <tr class="wrapper-sm" ng-show="track.year">
+                    <td class="padder-md"><span>Year: </span></td>
+                    <td><span>{{track.year}}</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="clear text-ellipsis col-sm-3">
+            <span class="wrapper-sm" ng-show="track.style.length">Styles:</span><br>
+            <ul>
+                <li ng-repeat="s in track.style">
+                    {{s.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="clear text-ellipsis col-sm-3">
+            <span>Votes: </span>
+            <table>
+                <tr ng-repeat="user in track.users_votes">
+                    <td>{{user.user}}</td>
+                    <td><i class="fa fa-plus vote-green m-r-xs m-l-sm"></i> {{user.up}}</td>
+                    <td><i class="fa fa-minus vote-red m-r-xs m-l-sm"></i> {{user.down}}</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

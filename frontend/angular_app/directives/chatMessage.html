@@ -1,0 +1,10 @@
+<div>
+
+    <li class="list-group-item">
+        <a href="#" class="thumb-sm pull-left m-r-sm">
+            <img ng-src="{{backendurl+chatcomment.avatar}}" class="img-circle"> </a>
+        <small class="pull-right"> {{dateformattoday(chatcomment)}}</small>
+        <strong class="block">{{chatcomment.username}}</strong>
+        <small ng-bind-html="chatcomment.text_chat |linky:'_blank'"&gt;<br>&lt;/div&gt;">{{chatcomment.text_chat}}</small>
+    </li>
+</div>

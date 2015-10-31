@@ -1,0 +1,127 @@
+.wrapper-full {
+    width: 100%;
+    float: none;
+    position: absolute;
+    box-shadow: none;
+    overflow: visible;
+    min-height: 100%;
+}
+
+aside {
+    -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+
+.aside {
+    -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+
+.vote-green {
+    color: #108d4e;
+}
+
+.vote-red {
+    color: #f05050;
+}
+
+.userselected {
+    background-color: #232c32 !important;
+}
+
+.userclickable {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+.jp-volume {
+    width: 120px !important;
+}
+
+.thumb-sm > img {
+    height: 40px;
+    width: 40px;
+}
+
+.playlistmenu {
+    z-index: 9999;
+    position: relative;
+}
+
+.playlistmenu-lg {
+    width: 100%;
+    text-align: center;
+    z-index: 9999;
+    position: relative;
+    box-shadow: 0 0 0 0;
+    border-radius: 30px;
+    color: rgb(85, 85, 85);
+}
+
+.navtitle {
+    white-space: pre;
+}
+
+.navtitle-show {
+    text-overflow: ellipsis;
+    max-width: 70px;
+    overflow: hidden;
+    max-height: 30px;
+}
+
+#chat{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+#chatform{
+    width: 95%;
+    margin: 0 auto;
+}
+#chatboxall{
+    bottom: 170px;
+    position: absolute;
+}
+
+img.trackdetails {
+    max-height: 80px;
+    margin-left: 20px;
+}
+
+.navbar-form > .form-group > .input-group {
+    border-radius: 30px;
+    box-shadow: 0px 0px 6px #3b464d;
+}
+
+.img-newsong {
+    height: 126px;
+}
+
+.list-group-item {
+    -webkit-animation-duration: 1.3s;
+    -moz-animation-duration: 1.3s;
+    animation-duration: 1.3s;
+}
+
+.addbutton {
+    position: fixed;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+    background-color: #15a25a;
+    border-color: #15a25a;
+}
+
+.pagination > li > a {
+    color: #788188;
+}

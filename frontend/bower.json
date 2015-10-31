@@ -1,0 +1,26 @@
+{
+  "name": "player",
+  "version": "1.0.0",
+  "authors": [
+    "Skalkowski <michal.skalkowski@internetprofil.pl>"
+  ],
+  "description": "player front-end",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "1.4.3",
+    "angular-ui-router": "0.2.15",
+    "socket.io": "0.6.1",
+    "animate.css": "~3.3.0",
+    "fontawesome": "~4.3.0",
+    "simple-line-icons": "~1.0.0",
+    "jplayer": "~2.9.2",
+    "angular-cookies": "~1.4.3",
+    "jquery.ui.touch-punch.dk": "~0.3.3",
+    "jquery": "~2.1.4",
+    "angular-animate": "~1.4.3",
+    "jquery.scrollTo": "~2.1.1",
+    "angular-utils-pagination": "~0.8.4",
+    "angular-sanitize": "1.4.3"
+  }
+}
