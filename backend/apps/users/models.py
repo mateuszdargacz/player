@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 __author__ = 'mateuszb'
 
 import datetime
@@ -48,6 +48,10 @@ class User(AbstractBaseUser):
     @property
     def get_todays_vote(self):
         return Vote.objects.filter(user=self, date_added=datetime.date.today())
+
+    @property
+    def get_votes(self):
+        return Vote.objects.filter(user=self)
 
     def get_full_name(self):
         return self.username

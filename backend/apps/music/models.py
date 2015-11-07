@@ -17,9 +17,14 @@ class Style(models.Model):
     def __unicode__(self):
         return self.name
 
+class LimitReached(Exception):
+    pass
 
 class TrackManager(models.Manager):
     def create(self, **kwargs):
+        limit = DefaultValues.objects.first().max_user_songs
+        if self.filter(added_by=kwargs['added_by']).count() >= limit:
+            raise LimitReached('You can\'t add more tracks! (%s already added)' % limit)
         track = self.model(**kwargs)
         self._for_write = True
         results = track.connect_to_api()
@@ -111,7 +116,9 @@ class Track(models.Model):
 
     @property
     def votes_assad(self):
-        votes = self.votes.filter(date_added=datetime.date.today())
+        votes = self.votes.all()
+        if DefaultValues.objects.first().votes_expire_daily:
+            votes = votes.filter(date_added=datetime.date.today())
         return votes.filter(up_vote=True).count() - votes.filter(up_vote=False).count()
 
     @property
@@ -121,12 +128,16 @@ class Track(models.Model):
 
     @property
     def total_relative_votes_today(self):
-        votes = self.votes.filter(date_added=datetime.date.today())
+        votes = self.votes.all()
+        if DefaultValues.objects.first().votes_expire_daily:
+            votes = votes.filter(date_added=datetime.date.today())
         return votes.filter(up_vote=True).count() - votes.filter(up_vote=False).count()
 
     @property
     def votes_user_today(self, user):
-        votes = self.votes.filter(date_added=datetime.date.today(), user=user)
+        votes = self.votes.filter(user=user)
+        if DefaultValues.objects.first().votes_expire_daily:
+            votes = votes.filter(date_added=datetime.date.today())
         return votes.filter(up_vote=True).count() - votes.filter(up_vote=False).count()
 
     @property
@@ -177,7 +188,7 @@ class Vote(models.Model):
     up_vote = models.BooleanField(default=False)
 
     def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
+            update_fields=None):
         super(Vote, self).save(force_insert, force_update, using, update_fields)
         t2c = TracktoChart.objects.get(track=self.track_id, chart=self.chart)
         t2c.votes.add(self)
@@ -238,7 +249,8 @@ class TracktoChart(models.Model):
         track_votes_list = []
         for user in users:
             votes_up = Vote.objects.filter(user=user.user, chart=self.chart, track_id=self.track, up_vote=True).count()
-            votes_down = Vote.objects.filter(user=user.user, chart=self.chart, track_id=self.track, up_vote=False).count()
+            votes_down = Vote.objects.filter(user=user.user, chart=self.chart, track_id=self.track,
+                up_vote=False).count()
             if votes_up or votes_down:
                 track_votes_dict = {}
                 track_votes_dict['user'] = user.user.username
@@ -266,17 +278,22 @@ class UsertoChart(models.Model):
 
     @property
     def todays_votes_chart(self):
-        votes = Vote.objects.filter(user=self.user, chart=self.chart, up_vote=True,
-                                    date_added=datetime.date.today()).count() - Vote.objects.filter(user=self.user,
-                                                                                                    chart=self.chart,
-                                                                                                    date_added=datetime.date.today(),
-                                                                                                    up_vote=False).count()
-        return votes
+
+        up_votes = Vote.objects.filter(user=self.user, chart=self.chart, up_vote=True)
+        down_votes = Vote.objects.filter(user=self.user, chart=self.chart, up_vote=False)
+        if DefaultValues.objects.first().votes_expire_daily:
+            up_votes = up_votes.filter(date_added=datetime.date.today())
+            down_votes = down_votes.filter(date_added=datetime.date.today())
+        votes_balance = up_votes.count() - down_votes.count()
+        return votes_balance
 
     @property
     def votes_left_chart(self):
-        votes_left = self.chart.votes_per_day - Vote.objects.filter(user=self.user, chart=self.chart,
-                                                                    date_added=datetime.date.today()).count()
+        votes = Vote.objects.filter(user=self.user, chart=self.chart)
+        if DefaultValues.objects.first().votes_expire_daily:
+            votes = votes.filter(date_added=datetime.date.today())
+
+        votes_left = self.chart.votes_per_day - votes.count()
         if votes_left > 0:
             return votes_left
         else:
@@ -290,7 +307,7 @@ def validate_only_one_instance(obj):
     """Makes sure that no more than one instance of a given model is created."""
     model = obj.__class__
     if (model.objects.count() > 0 and
-                obj.id != model.objects.get().id):
+            obj.id != model.objects.get().id):
         raise ValidationError("Can only create 1 %s instance" % model.__name__)
 
 
@@ -300,3 +317,6 @@ class DefaultValues(models.Model):
 
     user_image = models.ImageField(upload_to='static/images/defaults/', blank=True)
     song_image = models.ImageField(upload_to='static/images/defaults/', blank=True)
+    max_user_songs = models.IntegerField(default=10)
+    balance_playlist = models.BooleanField(default=False)
+    votes_expire_daily = models.BooleanField(default=False)

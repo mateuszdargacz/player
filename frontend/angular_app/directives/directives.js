@@ -12,7 +12,8 @@ angular.module('player')
                 upvote: "&",
                 downvote: "&",
                 votesleft: "=",
-                backendurl: "="
+                backendurl: "=",
+                user:"="
 
             }
         }
@@ -24,6 +25,16 @@ angular.module('player')
             scope: {
                 song: "=",
                 backendurl: "="
+
+            }
+        }
+    }).directive("indicator", function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'angular_app/directives/indicator.html',
+            replace: true,
+            scope: {
+                showindicator: "="
 
             }
         }

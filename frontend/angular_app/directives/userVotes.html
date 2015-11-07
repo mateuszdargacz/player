@@ -1,10 +1,19 @@
 <div class="padder-lg ">
     <div class="row m-xs">
-        <h3 class="font-thin">{{clickeduser.username}}'s votes today: </h3></div>
-    <ul class="list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-        <li class="list-group-item" ng-repeat="vote in clickeduser.get_todays_vote | orderBy:'-id'">
-            <voteofuser clickeduser="clickeduser" vote="vote"></voteofuser>
-        </li>
-    </ul>
+        <h3 class="font-thin">{{ clickeduser.username }}'s votes today: </h3>
+        <ul class="list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
+            <li class="list-group-item" ng-repeat="vote in clickeduser.get_todays_vote | orderBy:'-id'">
+                <voteofuser clickeduser="clickeduser" vote="vote"></voteofuser>
+            </li>
+        </ul>
+    </div>
+    <div class="row m-xs">
+        <h3 class="font-thin">Older {{ clickeduser.username }}'s votes: </h3>
+        <ul class="list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
+            <li class="list-group-item" ng-repeat="vote in clickeduser.get_votes | orderBy:'-id'">
+                <voteofuser clickeduser="clickeduser" vote="vote"></voteofuser>
+            </li>
+        </ul>
+    </div>
 
 </div>

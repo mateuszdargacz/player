@@ -91,7 +91,7 @@ angular.module('player')
         var connected = function () {
 
             socket.subscribe('player');
-            SocketFactory.sendUser(socket, $scope.user.username);
+            SocketFactory.sendUser(socket, $scope.user ? $scope.user.username : null);
             SocketFactory.getUsersOnline(socket);
             SocketFactory.getLatestSongs(socket);
             SocketFactory.getLatestVotes(socket);

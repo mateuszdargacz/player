@@ -15,6 +15,7 @@ angular.module('player')
 
         $scope.backendurl = 'http://' + backendEndpoint + ':' + backendPort;
         $scope.showTitles = true;
+        $scope.showIndicator = false;
         var disconected = false;
         var check = function () {
             // If the user is authenticated, they should not be here.
@@ -49,29 +50,37 @@ angular.module('player')
         };
 
         $scope.searchsongs = function () {
-            $location.url('/allsongs/'+$scope.searchterm);
+            $location.url('/allsongs/' + $scope.searchterm);
         };
-
-        $scope.send = function () {
-            return $http.post($scope.backendurl + '/api/v1/music/add/', {
-                title: $scope.title,
-                artist: $scope.artist,
-                link: $scope.link,
-                added_by: $scope.user.id,
-                playlist: $scope.chosenplaylist.id
-
-            }).then(sendSuccessFn, sendErrorFn);
-
-        };
-
-        sendSuccessFn = function (data, status, headers, config) {
+        var sendSuccessFn = function (data, status, headers, config) {
+            $scope.showIndicator = false;
             $scope.disconnect();
-            $location.url('/index');
+            //$location.url('/index');
         };
 
-        sendErrorFn = function (data, status, headers, config) {
-            console.log("Error!!!");
+        var sendErrorFn = function (data, status, headers, config) {
+            $scope.showIndicator = false;
+            $scope.formError = data.message;
         };
+        $scope.send = function () {
+            $scope.formError = false;
+            if (!$scope.link || !$scope.chosenplaylist || !$scope.artist || !$scope.title) {
+                $scope.formError = 'All fields are required'
+            }
+            else {
+                $scope.showIndicator = true;
+                return $http.post($scope.backendurl + '/api/v1/music/add/', {
+                    title: $scope.title,
+                    artist: $scope.artist,
+                    link: $scope.link,
+                    added_by: $scope.user.id,
+                    playlist: $scope.chosenplaylist ? $scope.chosenplaylist.id : 0
+
+                }).success(sendSuccessFn).error(sendErrorFn);
+            }
+
+        };
+
 
         var socket;
 
@@ -90,7 +99,7 @@ angular.module('player')
             }
         };
 
-       var reconnect = function () {
+        var reconnect = function () {
             if (!disconected) {
                 socket = new io.Socket(backendEndpoint);
                 socket.connect();

@@ -16,6 +16,8 @@ angular
     })
     .constant('backendEndpoint', '37.187.58.217')
     .constant('backendPort', '9001')
+    //.constant('backendEndpoint', '127.0.0.1')
+    //.constant('backendPort', '9000')
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $animateProvider, path) {
         $urlRouterProvider.otherwise("/index");
         $urlRouterProvider.when('', '/index');

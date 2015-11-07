@@ -38,9 +38,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img ng-src="{{backendurl + user.get_avatar}}" alt="...">
+                <img ng-src="{{ backendurl + user.get_avatar}}" alt="...">
               </span>
-                        {{user.username}} <b class="caret"></b>
+                        {{ user.username }} <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight">
                         <li>
@@ -116,11 +116,11 @@
                                     </li>
 
                                     <li ng-repeat="playlist in myplaylists">
-                                        <a ng-click="disconnect()" ng-href="#/listen/{{playlist.id}}">
+                                        <a ng-click="disconnect()" ng-href="#/listen/{{ playlist.id }}">
                                             <i class="icon-music-tone icon"></i>
                                             <span ng-show="showTitles"
                                                   ng-class="{'navtitle-show': true,'animated fadeIn': showTitles}"
-                                                  limit>{{playlist.name}}</span>
+                                                  limit>{{ playlist.name }}</span>
                                             <span class="navtitle" ng-hide="showTitles"> </span>
                                         </a>
                                     </li>
@@ -135,9 +135,9 @@
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable wrapper-lg">
-                        <div class="row">
-                            <div class="col-sm-offset-3 col-sm-6">
-                                <form ng-submit="send()">
+                        <form ng-submit="send()">
+                            <div class="row">
+                                <div class="col-sm-offset-3 col-sm-6">
                                     <div class="form-group wrapper-sm">
                                         <input placeholder="Title" ng-model="title"
                                                class="form-control rounded input-lg text-center no-border">
@@ -149,31 +149,55 @@
                                     <div class="form-group wrapper-sm">
                                         <input ng-model="link" placeholder="Link"
                                                class="form-control rounded input-lg text-center no-border" hel>
+
                                         <p class="help-block wrapper-sm">Youtube/soundcloud</p>
                                     </div>
                                     <div class="form-group wrapper-sm">
                                         <button class="form-control rounded input-lg text-center no-border dropdown-toggle"
                                                 data-toggle="dropdown">
-                                            <span class="form-switcher">Playlist {{chosenplaylist.name}}<span
+                                            <span class="form-switcher">Playlist {{ chosenplaylist.name }}<span
                                                     class="caret"></span></span></button>
                                         <ul class="dropdown-menu playlistmenu-lg animated flipInX text-dark-lter">
-                                            <li>
-                                                <a ng-click="$parent.chosenplaylist=''"> Don't add to any playlist </a>
-                                            </li>
-                                            <li ng-repeat="p in myplaylists">
-                                                <a ng-click="$parent.chosenplaylist=p"> {{p.name}} </a>
+
+                                            <li ng-repeat="p in myplaylists" ng-init="$parent.chosenplaylist=myplaylists[0]">
+                                                <a ng-click="$parent.chosenplaylist=p"> {{ p.name }} </a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <button type="submit"
+
+
+                                </div>
+
+                            </div>
+                            <div class="row" ng-show="showIndicator">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <div class="alert alert-info rounded center text-center" role="alert">
+                                        <strong>Mmmmhhhmmmm... </strong> Doing my best to find this track
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="formError">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <div class="alert alert-danger rounded center text-center" role="alert">
+                                        <strong>Oh snap!</strong> {{ formError }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <button type="submit" ng-disabled="showIndicator"
                                             class="btn btn-lg btn-success lt b-white b-2x btn-block btn-rounded no-border">
                                         <i class="icon-arrow-right pull-right"></i><span
                                             class="m-r-n-lg">Send song</span>
                                     </button>
 
-                                </form>
+                                </div>
+                                <div class="col-sm-1">
+                                    <indicator showindicator="showIndicator"></indicator>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                     </section>
                 </section>
             </section>

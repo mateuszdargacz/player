@@ -12,8 +12,9 @@
             </div>
         </div>
         <div class="col-sm-1">
-            <a ng-show="votesleft>0" ng-click="upvote(track)" class="m-r-sm"><i class="fa fa-plus-circle"></i></a>
-            <a ng-show="votesleft>0" ng-click="downvote(track)"><i class="fa fa-minus-circle"></i></a>
+            <a ng-show="votesleft>0 && !(user.username===track.added_username)" ng-click="upvote(track)" class="m-r-sm"><i class="fa fa-plus-circle"></i></a>
+            <a ng-show="votesleft>0 && !(user.username===track.added_username)" ng-click="downvote(track)"><i class="fa fa-minus-circle"></i></a>
+            <p ng-show="user.username===track.added_username">can't judge your songs :)</p>
         </div>
         <div class="col-sm-1">
             <span>{{track.total_relative_votes}} Votes</span>

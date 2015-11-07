@@ -9,7 +9,7 @@ import operator
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
-from apps.music.models import Track, Chart, Vote, TracktoChart, UsertoChart
+from apps.music.models import Track, Chart, Vote, TracktoChart, UsertoChart, DefaultValues
 from apps.api.serializers import TrackSerializer, ChartSerializer, UserSerializer, VoteSerializer, AllChartSerializer, \
     SimpleChartSerializer, UsertoChartSerializer, TrackListSerializer, NewTracksSerializer, MessageSerializer
 from apps.users.models import User
@@ -172,8 +172,9 @@ def make_vote(request, socket, context, message, up):
     track = Track.objects.get(id=message['track'])
     t2c = TracktoChart.objects.get(track=track, chart=chart)
     if red.get_now_playing(message['playlist']) != message['track'] and not t2c.was_played_today:
-        vote = Vote.objects.filter(user=user, chart=chart, track_id=track, date_added=datetime.date.today(),
-                                   up_vote=not up).last()
+        vote = Vote.objects.filter(user=user, chart=chart, track_id=track, up_vote=not up).last()
+        if DefaultValues.objects.first().votes_expire_daily:
+            vote = vote.filter(date_added=datetime.date.today())
         if vote:
             vote.delete()
         else:

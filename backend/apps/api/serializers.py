@@ -72,12 +72,14 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     confirm_password = serializers.CharField(write_only=True, required=False)
     get_todays_vote = VoteSerializer(many=True, required=False)
+    get_votes = VoteSerializer(many=True, required=False)
+
     get_avatar = serializers.ReadOnlyField()
 
     class Meta:
         # model = get_user_model()
         model = User
-        fields = ('id', 'email', 'username', 'password', 'confirm_password', 'get_avatar', 'get_todays_vote',)
+        fields = ('id', 'email', 'username', 'password', 'confirm_password', 'get_avatar', 'get_todays_vote', 'get_votes')
 
         def create(self, validated_data):
             return User.objects.create(**validated_data)

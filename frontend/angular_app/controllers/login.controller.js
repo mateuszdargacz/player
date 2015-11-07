@@ -14,7 +14,8 @@ angular.module('player')
             if (AuthenticationFactory.isAuthenticated()) {
                 $location.url('/listen');
             }
-        }
+        };
+        $scope.showIndicator = false;
 
         activate();
 
@@ -26,13 +27,20 @@ angular.module('player')
          */
         $scope.login = function () {
             if ($scope.email && $scope.password) {
+                $scope.showIndicator = true;
+                // HOTFIX insted of watcher it's show/hide
+                $('button[type="submit"]').parent().attr('class', 'col-sm-9');
                 AuthenticationFactory.login($scope.email, $scope.password, backendurl).then(check)
+
             }
         };
 
-
         var check = function () {
             $scope.errorCode = AuthenticationFactory.getErrorCode();
+            // HOTFIX insted of watcher it's show/hide
+            $('button[type="submit"]').parent().attr('class', 'col-sm-12');
+            $scope.showIndicator = false;
+
         };
 
         $scope.signup = function () {
