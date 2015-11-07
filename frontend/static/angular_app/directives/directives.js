@@ -5,7 +5,7 @@ angular.module('player')
     .directive("trackonlist", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/trackOnList.html',
+            templateUrl: '/static/angular_app/directives/trackOnList.html',
             replace: true,
             scope: {
                 track: "=",
@@ -20,7 +20,7 @@ angular.module('player')
     }).directive("newsongpreview", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/newSongPreview.html',
+            templateUrl: '/static/angular_app/directives/newSongPreview.html',
             replace: true,
             scope: {
                 song: "=",
@@ -31,7 +31,7 @@ angular.module('player')
     }).directive("indicator", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/indicator.html',
+            templateUrl: '/static/angular_app/directives/indicator.html',
             replace: true,
             scope: {
                 showindicator: "="
@@ -41,7 +41,7 @@ angular.module('player')
     }).directive("useronindexpage", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/userOnIndexPage.html',
+            templateUrl: '/static/angular_app/directives/userOnIndexPage.html',
             replace: true,
             scope: {
                 user: "=",
@@ -52,7 +52,7 @@ angular.module('player')
     }).directive("useronlistenpage", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/userOnListenPage.html',
+            templateUrl: '/static/angular_app/directives/userOnListenPage.html',
             replace: true,
             scope: {
                 user: "=",
@@ -63,7 +63,7 @@ angular.module('player')
     }).directive("uservotes", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/userVotes.html',
+            templateUrl: '/static/angular_app/directives/userVotes.html',
             replace: true,
             scope: {
                 clickeduser: "="
@@ -73,7 +73,7 @@ angular.module('player')
     }).directive("voteofuser", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/voteOfUser.html',
+            templateUrl: '/static/angular_app/directives/voteOfUser.html',
             replace: true,
             scope: {
                 clickeduser: "=",
@@ -83,7 +83,7 @@ angular.module('player')
     }).directive("latestvote", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/latestVote.html',
+            templateUrl: '/static/angular_app/directives/latestVote.html',
             replace: true,
             scope: {
                 vote: "=",
@@ -93,7 +93,7 @@ angular.module('player')
     }).directive("songtoplaylist", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/songToPlaylist.html',
+            templateUrl: '/static/angular_app/directives/songToPlaylist.html',
             replace: true,
             scope: {
                 song: "=",
@@ -106,7 +106,7 @@ angular.module('player')
     }).directive("chatmessages", function () {
         return {
             restrict: 'E',
-            templateUrl: 'angular_app/directives/chatMessage.html',
+            templateUrl: '/static/angular_app/directives/chatMessage.html',
             replace: true,
             scope: {
                 chatcomment: "=",

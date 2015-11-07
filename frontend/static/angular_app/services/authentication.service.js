@@ -57,7 +57,7 @@ angular.module('player')
              * @name loginErrorFn
              */
             function loginErrorFn(data, status, headers, config) {
-                errorCode = data.data.message;
+                errorCode = data ? data.data ? data.data.message: 0:0;
             }
         }
 
