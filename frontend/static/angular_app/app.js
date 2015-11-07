@@ -80,7 +80,7 @@ angular
             var prototype = io.Socket.prototype;
             io.Socket = function (host, options) {
                 options = options || {};
-                options.port = options.port || 9000;
+                options.port = options.port || 9001;
                 return prototype.constructor.call(this, host, options);
             };
 

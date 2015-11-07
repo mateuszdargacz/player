@@ -81,7 +81,7 @@ ROOT_URLCONF = 'music_player.urls'
 WSGI_APPLICATION = 'music_player.wsgi.application'
 
 SOCKETIO_HOST = '0.0.0.0'
-SOCKETIO_PORT = '9000'
+SOCKETIO_PORT = '9001'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
