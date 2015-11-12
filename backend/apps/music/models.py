@@ -27,15 +27,16 @@ class TrackManager(models.Manager):
             raise LimitReached('You can\'t add more tracks! (%s already added)' % limit)
         track = self.model(**kwargs)
         self._for_write = True
-        results = track.connect_to_api()
-        track.set_type()
-        track.set_meta_info(results)
+        # try:
+        #     results = track.connect_to_api()
+        #     track.set_type()
+        #     track.set_meta_info(results)
+        #     track.set_styles(results)
+        #     track.set_image(results)
+        # except IndexError:
+        #     pass
         track.save(force_insert=True, using=self.db)
-        try:
-            track.set_styles(results)
-            track.set_image(results)
-        except IndexError:
-            pass
+
         return track
 
 
