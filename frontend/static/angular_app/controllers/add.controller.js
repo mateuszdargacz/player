@@ -23,7 +23,7 @@ angular.module('player')
                 $location.url('/signin');
             }
             $scope.user = AuthenticationFactory.getAuthenticatedAccount();
-        }
+        };
 
         check();
 
@@ -55,7 +55,7 @@ angular.module('player')
         var sendSuccessFn = function (data, status, headers, config) {
             $scope.showIndicator = false;
             $scope.disconnect();
-            //$location.url('/index');
+            $location.url('/index');
         };
 
         var sendErrorFn = function (data, status, headers, config) {

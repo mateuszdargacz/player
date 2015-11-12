@@ -31,8 +31,11 @@ class TrackManager(models.Manager):
         track.set_type()
         track.set_meta_info(results)
         track.save(force_insert=True, using=self.db)
-        track.set_styles(results)
-        track.set_image(results)
+        try:
+            track.set_styles(results)
+            track.set_image(results)
+        except IndexError:
+            pass
         return track
 
 
@@ -53,7 +56,7 @@ class Track(models.Model):
         unique_together = ('title', 'artist',)
 
     def connect_to_api(self):
-        d = discogs_client.Client('MusicApp', user_token='VxmVigQmZTObrnGkipqutrxshKrbVZoKWqnMcpUe')
+        d = discogs_client.Client('MusicApp', user_token='lYZxOrAPASUOlpDrZMPaMdnWZczHZVoAoECIBjTM')
         results = d.search(artist=self.artist, track=self.title, type='master', format='album')
         return results
 
@@ -85,6 +88,7 @@ class Track(models.Model):
 
     def set_image(self, results):
         if not self.image:
+            print 'on set image', results[0]
             artist_name = self.artist.replace(' ', '_')
             filename = artist_name.encode('utf-8') + '.jpg'
             if len(results) == 0:
