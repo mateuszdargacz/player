@@ -22,6 +22,11 @@ class TrackView(views.APIView):
         data['added_by'] = User.objects.get(id=data['added_by'])
         chart_id = data['playlist']
         del data['playlist']
+        if not 'youtube' or 'soundcloud' in data['link']:
+            return Response({
+                    'status': 'Failed',
+                    'message': 'Please provide url from Youtube or soundcloud'
+                }, status=status.HTTP_400_BAD_REQUEST)
         try:
             track = Track.objects.create(**data)
             try:
