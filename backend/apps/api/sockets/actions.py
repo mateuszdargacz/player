@@ -19,7 +19,7 @@ import redis
 try:
     ADMIN_USER = User.objects.get(username='automat')
 except User.DoesNotExist:
-    ADMIN_USER = User.objects.get(id=1)
+    ADMIN_USER = User.objects.create_superuser('automat@zgon.xyz', 'automat', **dict(username='automat'))
 
 
 class Redis():

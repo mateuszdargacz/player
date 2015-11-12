@@ -14,10 +14,10 @@ angular
         ctrls: "/static/angular_app/templates/ctrls",
         tmpl: "/static/MusikTemplate"
     })
-    .constant('backendEndpoint', '37.187.58.217')
-    .constant('backendPort', '9001')
-    //.constant('backendEndpoint', '127.0.0.1')
-    //.constant('backendPort', '9000')
+    //.constant('backendEndpoint', '37.187.58.217')
+    //.constant('backendPort', '9001')
+    .constant('backendEndpoint', '127.0.0.1')
+    .constant('backendPort', '9000')
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $animateProvider, path) {
         $urlRouterProvider.otherwise("/index");
         $urlRouterProvider.when('', '/index');
@@ -71,7 +71,7 @@ angular
             });
 
     })
-    .run(function run($http, $rootScope, $location) {
+    .run(function run($http, $rootScope, $location, backendPort) {
         (function () {
 
             // Override the SocketIO constructor to provide a default
@@ -80,7 +80,7 @@ angular
             var prototype = io.Socket.prototype;
             io.Socket = function (host, options) {
                 options = options || {};
-                options.port = options.port || 9001;
+                options.port = options.port || backendPort;
                 return prototype.constructor.call(this, host, options);
             };
 

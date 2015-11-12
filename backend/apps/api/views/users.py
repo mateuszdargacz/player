@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import json
+from apps.music.models import UsertoChart
+from apps.music.models import Chart
 from rest_framework import permissions, viewsets, status, views
 from rest_framework.response import Response
 
@@ -27,8 +29,16 @@ class UserViewSet(viewsets.ModelViewSet):
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            User.objects.create_user(**serializer.validated_data)
-
+            user = User.objects.create_user(**serializer.validated_data)
+            u2c = UsertoChart()
+            try:
+                chart = Chart.objects.get(name='Sylwester 2015/2016')
+            except Chart.DoesNotExist:
+                Chart.objects.create(name='Sylwester 2015/2016', owned_by=User.objects.get(username='automat'),
+                votes_per_day=50, tracks_to_play=500)
+            u2c.user = user
+            u2c.chart = chart
+            u2c.save()
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
         return Response({
             'status': 'Bad request',
