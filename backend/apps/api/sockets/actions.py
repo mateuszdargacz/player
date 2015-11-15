@@ -171,14 +171,9 @@ def make_vote(request, socket, context, message, up):
     chart = Chart.objects.get(id=message['playlist'])
     track = Track.objects.get(id=message['track'])
     t2c = TracktoChart.objects.get(track=track, chart=chart)
-    if red.get_now_playing(message['playlist']) != message['track'] and not t2c.was_played_today:
-        vote = Vote.objects.filter(user=user, chart=chart, track_id=track, up_vote=not up).last()
-        if DefaultValues.objects.first().votes_expire_daily:
-            vote = vote.filter(date_added=datetime.date.today())
-        if vote:
-            vote.delete()
-        else:
-            Vote.objects.create(user=user, chart=chart, track_id=track, up_vote=up)
+    vote = Vote.objects.filter(user=user, chart=chart, track_id=track, up_vote=not up).last()
+    if vote:
+        vote.delete()
     else:
         Vote.objects.create(user=user, chart=chart, track_id=track, up_vote=up)
 
